@@ -1,6 +1,4 @@
-// Task Manager Module
 
-// Array to store tasks
 let tasks = [];
 
 // Function to add a task and call a callback function
@@ -52,6 +50,4 @@ addTask("Finish project", printTasks);
 
 // Adding multiple tasks at once
 addMultipleTasks("Clean room", "Do laundry", "Prepare dinner");
-
-// Demonstrating variable scope
 demonstrateScope();
