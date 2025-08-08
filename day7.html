@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align:center;
+        }
+        .error{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Validation</h1>
+    <form action="" onsubmit="return validationForm()">
+        <label for="name">Username</label>
+        <input type="text" name="name" id="name" autocomplete="name">
+        <div id="nameerror" class="error"></div><br><br>
+        <label for="phonenumber">Phonenumber</label>
+        <input type="text" name="phonenumber" id="phonenumber" autocomplete="tel">
+        <div id="numbererror" class="error"></div><br><br>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email">
+        <div id="emailerror" class="error"></div><br><br>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" autocomplete="new-password">
+        <div id="passworderror" class="error"></div><br><br>
+
+        <button type="submit">Validate</button>
+    </form>
+    <script>
+        function validatenum(phonenumber){
+            const regex = /^[0-9]{10}$/;
+            if(phonenumber.trim() === ""){
+                return "Phone number can't be empty";
+            }
+            if(!regex.test(phonenumber)){
+                return "Phone number must be 10 digits";
+            }
+            return "number is valid";
+        }
+
+        function validatename(name){
+            const regex = /^[A-Za-z\s]+$/;
+            if(name.trim() === ""){
+                return "Name can't be empty";
+            }
+            if(!regex.test(name)){
+                return "Name can only contain letters and spaces";
+            }
+            return "name is valid";
+        }
+
+        function validateEmail(email){
+            const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if(email.trim() === ""){
+                return "Email cannot be empty";
+            }
+            if(!regex.test(email)){
+                return "Invalid email";
+            }
+            return "Email is valid";
+        }
+
+        function validatepassword(password){
+            const regex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if(password.trim() === ""){
+                return "Password cannot be empty";
+            }
+            if(!regex.test(password)){
+                return "Password must be at least 8 characters";
+            }
+            return "Password is valid";
+        }
+
+        function validationForm(){
+            let phone = document.getElementById("phonenumber").value;
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            let nameerror = validatename(name);
+            let numbererror = validatenum(phone);
+            let emailerror = validateEmail(email);
+            let passworderror = validatepassword(password);
+
+            document.getElementById("nameerror").innerText = nameerror === "name is valid" ? "" : nameerror;
+            document.getElementById("numbererror").innerText = numbererror === "number is valid" ? "" : numbererror;
+            document.getElementById("emailerror").innerText = emailerror === "Email is valid" ? "" : emailerror;
+            document.getElementById("passworderror").innerText = passworderror === "Password is valid" ? "" : passworderror;
+
+            return false;
+        }
+
+    </script>
+</body>
+</html>
