@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // quantifiers - specify how many times a character or group should apper.
+        
+        // * -> matches zero or more consecutive as,it allows empty matches,at last it checks once again so if not it returns("")  
+
+         let text="aaabaa"
+         let pattern ="/\a*/g";
+         let result = text.match(pattern); //['aaa','','aa','']
+         console.log(result);
+
+        // + -> unlike ?,this doesn't allows empty matches,instead of matching one a at a time,it groups consecutive as together
+
+          let text="aaabaa"
+          let pattern ="/\a+/g";
+          let result = text.match(pattern); //['aaa','aa',]
+          console.log(result);
+
+        // ? -> matches zero or one a at each position,it also checks once again so if not it returs()  
+
+          let text="aaabaa"
+          let pattern ="/\a?/g";
+          let result = text.match(pattern); //[ 'a','a','a'
+                                            // '','a','a' 
+                                            // '']
+          console.log(result);              
+                            
+       
+       // modifiers(flags) chance how regex matches
+       //common modifiers:
+        // i -> case insensitive
+        // g -> global match (all occurances)
+        // m -> multiline match
+        
+            let sentences = "javascript programming language\n java programming language";
+            let pattern = /\programming+/igm;
+            let result = sentences.match(pattern);
+            console.log(result); // ['progamming' ,'programming']
+
+
+        // META CHARACTERS - have special meaning in regex
+        // . -> any character except new line
+        // \d -> digit(0-9)
+        // \w -> word character (letters,digits,_ )
+        // \s -> whitespaces
+        // \^ -> start of string/line
+        // $ -> end of string/line
+
+        let digit = '001js';
+        let pattern = /\d+/g;
+        let result = digit.match(pattern);
+        console.log(result); // ['001']
+
+        // GROUPING - parantheses () are used to group pattern and capture submatches
+         
+        let texts = "hello world";                 // [
+        let pattern = /(\w+)\s+(\w+)/;             //    'hello world',
+        let result = texts.match(pattern);        //      'hello',
+        let result1 = texts.match(pattern[0]);    //      'world',
+        let result2 = texts.match(pattern[1]);     //      index:0,
+        let result3 = texts.match(pattern[2]);     //      input : 'hello world',
+         console.log(result);                       //     groups : undefined
+                                                    // ]
+
+         // GROUPING -1.match()
+        
+         // 2.exec() group the output
+          let text = "apple banana apple garpe";
+          let pattern = /(apple)/;
+          let result = pattern.exec(text);
+
+          console.log(result[0]); // apple
+          console.log(result[1]); // apple
+
+          // 3.replace() = replaces the matches
+          let pattern = /apple/g;
+          let result = text.replace(pattern, "orange");
+          console.log(result); // orange banana orange grape
+
+          // 4.split() - splits string using regex
+          let pattern = /\s+/;
+          let result = text.split(pattern);
+          console.log(result); // ['apple','banana','apple','grape']
+    </script>
+</body>
+</html>
