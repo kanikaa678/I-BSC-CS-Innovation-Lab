@@ -1,0 +1,59 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .slider {
+            text-align: center;
+        }
+        img {
+            width: 300px;
+            height: 200px;
+            display: block;
+            margin: 20px auto;
+        }
+        #prev{
+            background-color: aqua;
+            color:green;
+        }
+        #next{
+            background-color: aqua;
+            color: green;
+        }
+        
+    </style>
+ </head>
+ <body>
+    <div class="slider">
+        <img src="image1.png" alt="image1"class="number-display" id="numberBox">
+        <button id="next">Next</button>
+        <button id="prev">Previous</button>
+    </div>
+    <script>
+        let numbers=["image1.png","image2.png","image3.png","image4.png","image5.png"];
+        let currentIndex = 0;
+
+        let numberBox = document.getElementById("numberBox");
+        let preBtn = document.getElementById("prev");
+        let nextBtn = document.getElementById("next");
+
+        nextBtn.addEventListener("click", ()=>{
+            currentIndex = (currentIndex + 1) % numbers.length;
+            numberBox.src = numbers[currentIndex];
+        })
+        preBtn.addEventListener("click", ()=>{
+            currentIndex = (currentIndex - 1) % numbers.length;
+            numberBox.src = numbers[currentIndex];
+        })
+
+        //Automatic sliding
+        setInterval(() =>{
+            currentIndex = (currentIndex + 1) % numbers.length;
+            numberBox.src = numbers[currentIndex];
+        }, 2000);
+    </script>
+ </body>
+ </html>
